@@ -1,5 +1,6 @@
-# Exercises
-## 1.1: course information, step1
+# Tasks
+
+## 1.1: Exercises step1
 The application that we will start working on in this exercise will be further developed in a few of the following exercises. In this and other upcoming exercise sets in this course, it is enough to only submit the final state of the application. If desired, you may also create a commit for each exercise of the series, but this is entirely optional.
 
 Use create-react-app to initialize a new application. Modify index.js to match the following
@@ -61,3 +62,13 @@ Refactor the Content component so that it does not render any names of parts or 
         </div>
     )
 ```
+
+## 1.6: unicafe
+Like most companies, the student restaurant of the University of Helsinki Unicafe collects feedback from its customers. Your task is to implement a web application for collecting customer feedback. There are only three options for feedback: good, neutral, and bad.
+
+The application must display the total number of collected feedback for each category.
+
+# 1.12*: anecdotes
+The world of software engineering is filled with anecdotes that distill timeless truths from our field into short one-liners.
+
+Expand the following application by adding a button that can be clicked to display a random anecdote from the field of software engineering:
