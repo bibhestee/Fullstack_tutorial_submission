@@ -40,7 +40,7 @@ const App = () => {
         found = true
       }
     })
-    found ? '' : setPersons(persons.concat({name: newName, number: number}))
+    found ? '' : setPersons(persons.concat({name: newName, number: number, id: persons.length}))
     setNewName('')
     setNumber('')
   }
