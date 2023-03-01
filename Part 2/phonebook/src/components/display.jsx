@@ -1,8 +1,8 @@
 const Display = ({contact}) => {
   return (
     <div>
-        {contact.map((person, i) => (
-          <p key={i}>{ person.name } { person.number }</p>
+        {contact.map((person) => (
+          <p key={person.id}>{ person.name } { person.number }</p>
         ))}
     </div>
   )
