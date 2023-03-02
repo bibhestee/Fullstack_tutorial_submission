@@ -1,8 +1,8 @@
 import { useState, useEffect  } from "react"
-import axios from 'axios'
 import Form from "./components/form"
 import Display from "./components/display"
 import Search from "./components/search"
+import personService from './services/persons'
 
 const App = () => {
 
@@ -10,21 +10,21 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [number, setNumber] = useState('')
   let [contact, setContact] = useState([])
-
+ 
   useEffect(() => {
-    axios
-      .get('http://localhost:3000/persons')
-      .then(response => {
-        const names = response.data
-        setPersons(names)
+    personService
+      .getAll()
+      .then(data => {
+        setPersons(data)
       })
-  }, [])
+  }, [persons])
 
   const showContact = (event) => {
    if (event.target.value != '') {
         let newList = persons.filter((person) => {
         return person.name.toLowerCase().includes(event.target.value.toLowerCase()) === true
     })
+      console.log(newList)
       setContact(newList)
    }
     else {
@@ -49,7 +49,8 @@ const App = () => {
         found = true
       }
     })
-    found ? '' : setPersons(persons.concat({name: newName, number: number, id: persons.length}))
+    const newData = {name: newName, number: number, id: persons.length + 1}
+    found ? '' : personService.create(newData); setPersons(persons.concat(newData))
     setNewName('')
     setNumber('')
   }
