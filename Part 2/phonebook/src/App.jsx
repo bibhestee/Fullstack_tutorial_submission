@@ -6,25 +6,35 @@ import personService from './services/persons'
 
 const App = () => {
 
+  // INITIALIZE THE useState HOOKS
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [number, setNumber] = useState('')
-  let [contact, setContact] = useState([])
- 
-  useEffect(() => {
+  const [contact, setContact] = useState([])
+
+
+  const getAllContact = () => {
     personService
       .getAll()
       .then(data => {
         setPersons(data)
+        setContact(data)
       })
-  }, [persons])
+      .catch(e => {
+        console.log(e)
+      })
+  }
 
+  useEffect(() => {
+    getAllContact()
+  }, [])
+
+  // Display contact based on the filter parameter
   const showContact = (event) => {
    if (event.target.value != '') {
         let newList = persons.filter((person) => {
         return person.name.toLowerCase().includes(event.target.value.toLowerCase()) === true
     })
-      console.log(newList)
       setContact(newList)
    }
     else {
@@ -32,25 +42,45 @@ const App = () => {
     }
   }
 
+  // Extract data from name and number input
   const addPerson = (event) => {
     setNewName(event.target.value)
   }
-
   const addNumber = (event) => {
     setNumber(event.target.value)
   }
 
+  // HANDLE BUTTON CLICK
   const handleClick = (event) => {
-    event.preventDefault()
+    event.preventDefault() 
     let found = false
-    persons.forEach((person) => {
-      if (person.name == newName) {
-        alert(`${newName} is already added to phonebook`)
+    // Check if contact is already added to phonebook
+    persons.forEach((user) => {
+      if (user.name == newName) {
+        const result = confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)
+        // Update the server db if user confirms the operation
+        if (result) {
+          personService
+            .update(user.id, {...user, number: number})
+            .catch(e => {
+              console.log(e)
+            })
+        }
+        getAllContact()
         found = true
       }
     })
-    const newData = {name: newName, number: number, id: persons.length + 1}
-    found ? '' : personService.create(newData); setPersons(persons.concat(newData))
+    // Create a new contact if not existing
+    if (found === false) {
+      const newData = {name: newName, number: number, id: persons.len + 1}
+      personService
+        .create(newData)
+        .then(data => setContact(contact.concat(data)))
+        .catch(e => {
+          console.log(e)
+        })
+      getAllContact()
+    }
     setNewName('')
     setNumber('')
   }
@@ -61,7 +91,7 @@ const App = () => {
       <Search showContact={showContact} />
       <Form newName={newName} number={number} handleClick={handleClick} addNumber={addNumber} addPerson={addPerson} />
       <h2>Numbers</h2>
-      <Display contact={contact} />
+      <Display contact={contact} getAllContact={getAllContact}/>
     </div>
   )
 }
