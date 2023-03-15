@@ -3,8 +3,19 @@ import axios from 'axios'
 import Display from "./components/Display"
 
 const App = () => {
-  const [data, setData] = useState([]) // Store the countries fetch from api
-  const [countries, setCountries] = useState([]) // Store the filtered countries
+  /**
+   * App - Main App component
+   * 
+   * Components: 
+   *    Display
+   * 
+   * @data: Store the countries fetched from api
+   * @countries: Store the filtered countries
+   * 
+   * @returns: App Component
+   */
+  const [data, setData] = useState([])
+  const [countries, setCountries] = useState([]) 
 
   useEffect(()=> {
     axios.get('https://restcountries.com/v3.1/all')
