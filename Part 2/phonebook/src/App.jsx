@@ -2,6 +2,7 @@ import { useState, useEffect  } from "react"
 import Form from "./components/form"
 import Display from "./components/display"
 import Search from "./components/search"
+import Notification from "./components/notification"
 import personService from './services/persons'
 
 const App = () => {
@@ -11,12 +12,25 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [number, setNumber] = useState('')
   const [contact, setContact] = useState([])
+  const [message, setMessage] = useState(null)
 
 
   const getAllContact = () => {
     personService
       .getAll()
-      .then(data => {
+      .then((response) => {
+        const data = response.sort((a, b) => {
+              const nameA = a.name.toUpperCase(); // ignore upper and lowercase
+              const nameB = b.name.toUpperCase(); // ignore upper and lowercase
+              if (nameA < nameB) {
+                return -1
+              }
+              if (nameA > nameB) {
+                return 1
+              }
+              // names must be equal
+              return 0
+            })
         setPersons(data)
         setContact(data)
       })
@@ -42,6 +56,13 @@ const App = () => {
     }
   }
 
+  const handleNotification = (msg, type) => {
+    setMessage({msg: msg, type: type})
+              setTimeout(() => {
+                setMessage(null)
+              }, 5000)
+  }
+
   // Extract data from name and number input
   const addPerson = (event) => {
     setNewName(event.target.value)
@@ -62,11 +83,17 @@ const App = () => {
         if (result) {
           personService
             .update(user.id, {...user, number: number})
+            .then(() => {
+              const msg = `${newName} number is successfully update to ${number}`
+              handleNotification(msg, 'success')
+              getAllContact()
+            })
             .catch(e => {
-              console.log(e)
+              const msg = `Information of ${newName} has already been removed from server`
+              handleNotification(msg, 'error')
             })
         }
-        getAllContact()
+       
         found = true
       }
     })
@@ -75,11 +102,16 @@ const App = () => {
       const newData = {name: newName, number: number, id: persons.len + 1}
       personService
         .create(newData)
-        .then(data => setContact(contact.concat(data)))
-        .catch(e => {
-          console.log(e)
+        .then((data) => {
+          getAllContact()
+          const msg = `Added ${newData.name}`
+          handleNotification(msg, 'success')
+          
         })
-      getAllContact()
+        .catch(e => {
+          const msg = `Can't create ${newData.name}: ${e.message}`
+          handleNotification(msg, 'error')
+        })
     }
     setNewName('')
     setNumber('')
@@ -88,10 +120,11 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={message} />
       <Search showContact={showContact} />
       <Form newName={newName} number={number} handleClick={handleClick} addNumber={addNumber} addPerson={addPerson} />
       <h2>Numbers</h2>
-      <Display contact={contact} getAllContact={getAllContact}/>
+      <Display contact={contact} getAllContact={getAllContact} handleNotification={handleNotification} />
     </div>
   )
 }

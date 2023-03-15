@@ -1,12 +1,17 @@
 import personService from '../services/persons'
 
-const Button = ({id, name, getAllContact}) => {
+const Button = ({id, name, getAllContact, handleNotification}) => {
   const handleClick = () => {
     const result = confirm(`Delete ${name} ?`)
     if (result) {
-      personService.deleteOne(id)
+      personService
+        .deleteOne(id)
+        .then(() => {
+          const msg = `${name} deleted sucessfully!`
+          handleNotification(msg, 'success')
+          getAllContact()
+        })
     }
-    getAllContact()
   }
 
   return (
@@ -14,11 +19,11 @@ const Button = ({id, name, getAllContact}) => {
   )
 }
 
-const Display = ({contact, getAllContact}) => {
+const Display = ({contact, getAllContact, handleNotification}) => {
   return (
     <div>
         {contact.map((person) => (
-          <p key={person.id}>{ person.name } { person.number } <Button id={person.id} name={person.name} getAllContact={getAllContact}/></p>
+          <p key={person.id}>{ person.name } { person.number } <Button id={person.id} name={person.name} getAllContact={getAllContact} handleNotification={handleNotification} /></p>
         ))}
     </div>
   )
