@@ -32,7 +32,7 @@
   POST '/api/persons' - Create contact details
 
   ### Update Contact Endpoint
-  POST '/api/persons/:id' - Update contact details
+  PUT '/api/persons/:id' - Update contact details
 
 
 [Phonebook](https://phonebook-nodejs.fly.dev/)
