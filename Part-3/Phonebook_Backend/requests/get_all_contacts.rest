@@ -19,12 +19,12 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3001/api/persons
+PUT http://localhost:3001/api/persons/37
 content-type: application/json
 
 {
-    "name": "Muhammad Furqon",
-    "number": "+324 032 04200"
+    "name": "Abdullahi Maryam",
+    "number": "+224 032 04200"
 }
 
 ###
