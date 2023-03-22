@@ -109,7 +109,7 @@ const App = () => {
           
         })
         .catch(e => {
-          const msg = `Can't create ${newData.name}: ${e.message}`
+          const msg = e.response.data.error
           handleNotification(msg, 'error')
         })
     }

@@ -51,6 +51,14 @@ understandable when the error is encountered.
   - 400 means Bad request: used when the request information is invalid i.e wrong ID or Endpoint
   - 404 means Not found : used when the requested information is not found on the database.
   - 500 means Internal server error : used when the model method raise an exception while connecting with DB.
+
+## Coding Style Check
+ ### Uing ESlint - Like pycodestyle(Python) and betty(C)
+ To install 
+  `npm install eslint --save-dev`
+ Then initialize the default configuration
+ `npx eslint --init`
+
 [Phonebook](https://phonebook-nodejs.fly.dev/)
 
 Code by - [Bibest](https://github.com/bibhestee)😎
