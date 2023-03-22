@@ -2,17 +2,18 @@
 
 ## Installation guide
   ### Install and create server environment for nodejs backend
-        ` npm init `
+     npm init 
   ### Install express package
-        `npm install express `
+     npm install express 
   ### Install nodemon to automatically restart the server in dev mode
-        `npm install --save-dev nodemon`
+     npm install --save-dev nodemon
 
 ## Starting the Server
   ### To start the server, use:
-     ` npm run dev ` for development mode
-     or
-     ` npm start `
+     npm run dev   
+  for development mode
+  or
+     npm start 
 
 ## Endpoints
 
@@ -37,8 +38,10 @@
 
 ## Setting Environment variable on fly.io
 To set the environment variable on fly servers, run this command:
-`fly secrets set MONGODB_URI='url'`
-`fly secrets set PORT=3000`
+```
+fly secrets set MONGODB_URI='url'
+fly secrets set PORT=3000
+```
 
 ## Handling Errors
 If the user is not found on the database either throught the findByID method or findByIDAndUpdate
@@ -55,9 +58,13 @@ understandable when the error is encountered.
 ## Coding Style Check
  ### Uing ESlint - Like pycodestyle(Python) and betty(C)
  To install 
-  `npm install eslint --save-dev`
+ ```
+ npm install eslint --save-dev
+ ```
  Then initialize the default configuration
- `npx eslint --init`
+ ```
+ npx eslint --init
+ ```
 
 [Phonebook](https://phonebook-nodejs.fly.dev/)
 
