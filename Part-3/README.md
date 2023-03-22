@@ -35,6 +35,22 @@
   PUT '/api/persons/:id' - Update contact details
 
 
+## Setting Environment variable on fly.io
+To set the environment variable on fly servers, run this command:
+`fly secrets set MONGODB_URI='url'`
+`fly secrets set PORT=3000`
+
+## Handling Errors
+If the user is not found on the database either throught the findByID method or findByIDAndUpdate
+the method returns null and this error should be properly managed.
+Therefore, checking if response is null and setting a status code code of 404 not found will be more
+understandable when the error is encountered.
+  ### Some of the Error codes used in this application
+  - 200 means Success : This code represents any successful request <=> response.
+  - 204 means No content : This is used mostly with the DELETE Method.
+  - 400 means Bad request: used when the request information is invalid i.e wrong ID or Endpoint
+  - 404 means Not found : used when the requested information is not found on the database.
+  - 500 means Internal server error : used when the model method raise an exception while connecting with DB.
 [Phonebook](https://phonebook-nodejs.fly.dev/)
 
 Code by - [Bibest](https://github.com/bibhestee)😎
