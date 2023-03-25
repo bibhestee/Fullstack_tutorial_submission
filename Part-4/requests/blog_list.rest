@@ -6,8 +6,12 @@ POST http://localhost:3003/api/blogs HTTP/1.1
 Content-Type: application/json
 
 {
-    "title": "JavaScript: Popular Programming Trends and Optimization Tips in 2023",
-    "author": "Austin - Kien Hoang",
-    "url": "https://medium.com/@devhoangkien/javascript-popular-programming-trends-and-optimization-tips-in-2023-be39a92f7a04",
-    "likes": 5
+    "title": "Designing a Database to Handle Millions of Data Copy",
+    "author": "Hafiq Iqmal",
+    "url": "https://medium.com/geekculture/designing-a-database-to-handle-millions-of-data-3cb6fe226a7c",
+    "likes": 76
 }
+
+
+###
+GET http://localhost:3003/api/ HTTP/1.1
