@@ -3,17 +3,18 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const blogRouter = require('./controllers/blogs')
 const {MONGODB_URI} = require('./utils/config')
+const {info, error} = require('./utils/logger')
 
 const app = express()
 
-console.log('connecting to MONGODB Atlas')
+info('connecting to MONGODB Atlas')
 
 mongoose.connect(MONGODB_URI)
     .then(() => {
-        console.log('connected to MONGODB Atlas')
+        info('connected to MONGODB Atlas')
     })
     .catch((err) => {
-        console.error(err.message)
+        error(err.message)
     })
 
 // Middleware
