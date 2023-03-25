@@ -1,15 +1,16 @@
-require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
 const blogRouter = require('./controllers/blogs')
+const {MONGODB_URI} = require('./utils/config')
 
 const app = express()
 
-const mongoUrl = process.env.MONGODB_URI
-mongoose.connect(mongoUrl)
+console.log('connecting to MONGODB Atlas')
+
+mongoose.connect(MONGODB_URI)
     .then(() => {
-        console.log('connected to db')
+        console.log('connected to MONGODB Atlas')
     })
     .catch((err) => {
         console.error(err.message)
