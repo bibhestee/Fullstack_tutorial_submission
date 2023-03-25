@@ -4,10 +4,10 @@ GET http://localhost:3001/api/persons HTTP/1.1
 GET http://localhost:3001/info HTTP/1.1
 
 ####
-GET http://localhost:3001/api/persons/641b0d712ca914d411b2682f HTTP/1.1
+GET http://localhost:3001/api/persons/641ef0304d91027faa1c6e95 HTTP/1.1
 
 ###
-DELETE http://localhost:3001/api/persons/642b0e60cf95e6904d09fd40 HTTP/1.1
+DELETE http://localhost:3001/api/persons/641ef0304d91027faa1c6e95 HTTP/1.1
 
 ###
 POST http://localhost:3001/api/persons HTTP/1.1
@@ -15,16 +15,16 @@ Content-Type: application/json
 
 {
     "name": "Abdulbasit Ola",
-    "number": "234 818-475-7979"
+    "number": "234-838993992"
 }
 
 ###
-PUT http://localhost:3001/api/persons/641b0d712ca914d411b2682f
+PUT http://localhost:3001/api/persons/641ee8d087f2f5e6bfe90b7c
 content-type: application/json
 
 {
-    "name": "Abdullahi Muhammad",
-    "number": "+234 032 01534"
+    "name": "Abdulbasit Ola",
+    "number": "234-81838020"
 }
 
 ###

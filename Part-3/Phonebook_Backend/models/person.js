@@ -1,14 +1,5 @@
 const mongoose = require('mongoose')
 
-const MONGODB_URI = process.env.MONGODB_URI
-
-mongoose.set('strictQuery', false)
-mongoose.connect(MONGODB_URI)
-    .then(() => {
-        console.log('connected to MONGODB')
-    })
-    .catch(err => console.log('error connecting to MONGODB:', err.message))
-
 // Create a schema
 const personSchema = new mongoose.Schema({
     name: {

@@ -2,10 +2,10 @@
   "name": "phonebook_backend",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js",
+    "start": "node index.js",
+    "dev": "nodemon index.js",
     "build:ui": "rm -rf dist && cd ../../Part-2/phonebook && npm run build -y && cp -r dist ../../Part-3/Phonebook_Backend",
     "deploy": "fly deploy",
     "deploy:full": "npm run build:ui && npm run deploy",
