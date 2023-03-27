@@ -1,33 +1,6 @@
 const listHelper = require('../utils/list_helper')
 
-test('dummy returns one', () => {
-    const blogs = []
-
-    const result = listHelper.dummy(blogs)
-    const expected = 1
-
-    expect(result).toBe(expected)
-})
-
-/* 
- To run a single test( or describe block) is to specify the name of the test
- to run with the -t flag
-
- npm test -- -t 'when list has only one blog, equals the likes of that'
-*/
-describe('total likes', () => {
-    const listWithOneBlog = [
-        {
-        _id: '5a422aa71b54a676234d17f8',
-        title: 'Go To Statement Considered Harmful',
-        author: 'Edsger W. Dijkstra',
-        url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
-        likes: 5,
-        __v: 0
-        }
-    ]
-
-    const blogs = [
+const blogs = [
         {
             _id: "5a422a851b54a676234d17f7",
             title: "React patterns",
@@ -76,7 +49,32 @@ describe('total likes', () => {
             likes: 2,
             __v: 0
         }  
-    ]   
+] 
+
+test('dummy returns one', () => {
+    const result = listHelper.dummy([])
+    const expected = 1
+
+    expect(result).toBe(expected)
+})
+
+/* 
+ To run a single test( or describe block) is to specify the name of the test
+ to run with the -t flag
+
+ npm test -- -t 'when list has only one blog, equals the likes of that'
+*/
+describe('total likes', () => {
+    const listWithOneBlog = [
+        {
+        _id: '5a422aa71b54a676234d17f8',
+        title: 'Go To Statement Considered Harmful',
+        author: 'Edsger W. Dijkstra',
+        url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
+        likes: 5,
+        __v: 0
+        }
+    ]  
 
     test('of empty list is zero', () => {
         const result = listHelper.totalLikes([])
@@ -91,5 +89,26 @@ describe('total likes', () => {
     test('of a bigger list is calculated right', () => {
         const result = listHelper.totalLikes(blogs)
         expect(result).toBe(36)
+    })
+})
+
+describe('favorite blog', () => {
+
+    test('of empty list is empty object', () => {
+        const result = listHelper.favoriteBlog([])
+        expect(result).toEqual({})
+    })
+
+    test('of a non empty list', () => {
+        const result = listHelper.favoriteBlog(blogs)
+        const expected = {
+            _id: "5a422b3a1b54a676234d17f9",
+            title: "Canonical string reduction",
+            author: "Edsger W. Dijkstra",
+            url: "http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html",
+            likes: 12,
+            __v: 0
+        }
+        expect(result).toEqual(expected)
     })
 })

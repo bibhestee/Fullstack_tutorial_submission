@@ -17,6 +17,19 @@ const totalLikes = (blogs) => {
     :  0
 }
 
+const favoriteBlog = (blogs) => {
+    if (blogs.length > 0) {
+        let i = 0
+        blogs.map(blog => {
+            i = blog.likes > i ? blog.likes : i
+        })
+        return blogs.find(blog => {
+            return blog.likes === i
+        })
+    }
+    return {}
+}
+
 module.exports = {
-    dummy, totalLikes
+    dummy, totalLikes, favoriteBlog
 }
