@@ -1,5 +1,13 @@
 const listHelper = require('../utils/list_helper')
 
+// Load lodash full build.
+// const lodash = require('lodash')
+// Load the core build.
+// const _ = require('lodash/core')
+// Load method categories.
+// const array = require('lodash/array')
+const object = require('lodash/fp/object')
+
 const blogs = [
         {
             _id: "5a422a851b54a676234d17f7",
@@ -108,6 +116,17 @@ describe('favorite blog', () => {
             url: "http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html",
             likes: 12,
             __v: 0
+        }
+        expect(result).toEqual(expected)
+    })
+})
+
+describe('most blog', () => {
+    test('of an author in a blog list', () => {
+        const result = listHelper.mostBlog(blogs)
+        const expected = {
+            author: "Robert C. Martin",
+            blogs: 3
         }
         expect(result).toEqual(expected)
     })
