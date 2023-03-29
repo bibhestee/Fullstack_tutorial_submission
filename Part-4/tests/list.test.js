@@ -122,11 +122,32 @@ describe('favorite blog', () => {
 })
 
 describe('most blog', () => {
+    test('of empty list is empty object', () => {
+        const result = listHelper.mostBlog([])
+        expect(result).toEqual({})
+    })
+
     test('of an author in a blog list', () => {
         const result = listHelper.mostBlog(blogs)
         const expected = {
             author: "Robert C. Martin",
             blogs: 3
+        }
+        expect(result).toEqual(expected)
+    })
+})
+
+describe('most likes', () => {
+    test('of empty list is an empty object', () => {
+        const result = listHelper.favoriteBlog([])
+        expect(result).toEqual({})
+    })
+
+    test('of a filled list should return an object', () => {
+        const result = listHelper.mostLikes(blogs)
+        const expected = {
+            author: "Edsger W. Dijkstra",
+            likes: 17
         }
         expect(result).toEqual(expected)
     })

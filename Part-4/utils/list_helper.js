@@ -52,6 +52,29 @@ const mostBlog = (blogs) => {
     return {}
 }
 
+const mostLikes = (blogs) => {   
+    if (blogs.length > 0) {
+        authorLikes = {}
+        blogs.map((blog) => {
+            if (blog.author in authorLikes) {
+                authorLikes[blog.author] = authorLikes[blog.author] + blog.likes
+            } else {
+                authorLikes[blog.author] = blog.likes
+            }     
+        })
+        const authors = Object.keys(authorLikes)
+        const totalLikes = Object.values(authorLikes)
+        // Max likes
+        const max = Math.max(...totalLikes)
+        // Author with max likes
+        const author = authors.find(author => authorLikes[author] === max)
+        return {
+            "author": author,
+            "likes": max
+        }
+    }
+    return {}
+}
 module.exports = {
-    dummy, totalLikes, favoriteBlog, mostBlog
+    dummy, totalLikes, favoriteBlog, mostBlog, mostLikes
 }
